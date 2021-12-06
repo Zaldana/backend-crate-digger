@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const User = require("../model/User");
-const dbErrorHelper =require("./../../lib/dbErrorHelper/dbErrorHelper")
+const dbErrorHelper =require("../../lib/dbErrorHelper/dbErrorHelper")
 
 async function createUser(req, res) {
 
@@ -136,6 +136,5 @@ async function login(req, res) {
 module.exports = {
     createUser,
     login,
-    getUserInfo,
     updateUser
 };

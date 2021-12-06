@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
             type: String,
         },
 
-        collection: [{ type: mongoose.Schema.ObjectId, ref: "collection" }]
+        vinylCollection: [{ type: mongoose.Schema.ObjectId, ref: "vinyl-collection" }]
 
     },
 

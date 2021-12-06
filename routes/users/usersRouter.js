@@ -5,7 +5,6 @@ var passport = require('passport')
 const {
   createUser,
   login,
-  getUserInfo,
   updateUser
 } = require("./controller/userController");
 
@@ -16,7 +15,7 @@ const {
   validateLoginData,
   validateUpdateData
   // jwtMiddleware
-} = require("../lib/authMiddleware");
+} = require("../lib/authMiddleWare");
 
 router.get(
   '/',

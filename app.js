@@ -9,14 +9,23 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors")
 var app = express();
+var mongoose = require("mongoose")
 
 //Routers
 var indexRouter = require("./routes/index");
 var usersRouter = require('./routes/users/usersRouter');
-// var collectionRouter = require('./routes/movie/movieRouter')
 
 var userJWTLoginStrategy = require('./routes/lib/passport/user-passport');
 const passport = require('passport');
+
+mongoose
+  .connect(process.env.MONGO_DB)
+  .then(() => {
+  console.log("MONGODB CONNECTED");
+  })
+  .catch((e) => {
+  console.log(e);
+  })
 
 //Invoke middleware
 app.use(cors("*"));
