@@ -12,6 +12,7 @@ const {
   checkIsUndefined,
   validateCreateData,
   validateLoginData,
+  validateUpdateData
   // jwtMiddleware
 } = require("../lib/authMiddleware");
 
@@ -32,7 +33,7 @@ router.put(
   "/edit-user",
   checkIsUndefined,
   checkIsEmpty,
-  validateCreateData,
+  validateUpdateData,
   updateUser
 );
 
