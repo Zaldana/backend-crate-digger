@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const User = require("../model/User");
-const errorHandler = require("../../lib/authMiddleware")
+const dbErrorHelper =require("./../../lib/dbErrorHelper/dbErrorHelper")
 
 async function createUser(req, res) {
 
@@ -24,9 +24,13 @@ async function createUser(req, res) {
 
         res.json({ message: "success", payload: savedUser });
 
-    } catch (error) {
+    } catch (e) {
 
-        res.status(500).json({ message: "error", error: errorHandler(error) });
+        const { message, statusCode } = dbErrorHelper(e);
+
+        res.status(statusCode).json({
+            message: message,
+        });
 
     }
 };
@@ -51,9 +55,13 @@ async function updateUser(req, res) {
 
         res.json({ message: "success", payload: updatedUser });
 
-    } catch (error) {
+    } catch (e) {
 
-        res.status(500).json({ message: "error", error: error.message });
+        const { message, statusCode } = dbErrorHelper(e);
+
+        res.status(statusCode).json({
+            message: message,
+        });
 
     }
 }

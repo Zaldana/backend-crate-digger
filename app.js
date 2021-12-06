@@ -13,15 +13,21 @@ var app = express();
 //Routers
 var indexRouter = require("./routes/index");
 var usersRouter = require('./routes/users/usersRouter');
-var collectionRouter = require('./routes/movie/movieRouter')
+// var collectionRouter = require('./routes/movie/movieRouter')
+
+var userJWTLoginStrategy = require('./routes/lib/passport/user-passport');
+const passport = require('passport');
 
 //Invoke middleware
-app.use(cors());
+app.use(cors("*"));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize());
+passport.use("jwt-user", userJWTLoginStrategy)
 
 //Invoke routing middleware
 app.use('/', indexRouter);
