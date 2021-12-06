@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport')
 
 const {
   createUser,
   login,
-  getUserInfo
+  getUserInfo,
+  updateUser
 } = require("./controller/userController");
 
 const {
@@ -16,10 +18,12 @@ const {
   // jwtMiddleware
 } = require("../lib/authMiddleware");
 
-router.get('/',
-  // jwtMiddleware,
-  getUserInfo
-);
+router.get(
+  '/',
+  passport.authenticate("jwt-user", { session: false }),
+  function (req, res, next) {
+    res.send('respond with a resource');
+  });
 
 router.post(
   "/create-user",

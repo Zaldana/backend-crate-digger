@@ -60,79 +60,70 @@ async function updateUser(req, res) {
 
 async function login(req, res) {
 
-    const { email, password } = req.body;
-
-    let foundUser = await User.findOne({ email: email });
-
     try {
 
-        if (!foundUser) {
+        let foundUser = await User.findOne({ email: req.body.email }).select(
+            "-__v"
+        );
 
-            res.status(500).json({
-                message: "error",
-                error: "please create an account",
-            });
-
-        } else {
-
-
-            //check if password match first
-
-
-            let matchedPassword = await bcrypt.compare(password, foundUser.password);
-
-            if (!matchedPassword) {
-
-                res.status(500).json({
-                    message: "error",
-                    error: "Please check email and password is correct"
-                })
-
-            } else {
-
-                let jwtToken = jwt.sign(
-
-                    {
-                        email: foundUser.email,
-                        username: foundUser.username,
-                    },
-
-                    process.env.JWT_SECRET,
-                    { expiresIn: "48h" }
-
-                );
-
-                res.json({ message: "success", payload: jwtToken })
-
-            }
+        if (foundUser === null) {
+            throw {
+                message: "User not found, please sign up",
+                code: 404,
+            };
         }
 
-    } catch (e) {
+        let comparedPassword = await bcrypt.compare(
+            req.body.password,
+            foundUser.password
+        );
 
-        res.status(500).json({
-            message: "error",
-            error: e.message,
+        if (!comparedPassword) {
+            throw {
+                message: "Check your email and password",
+                code: 401,
+            };
+        }
+
+        let jwtToken = jwt.sign(
+            { email: foundUser.email, username: foundUser.username },
+            process.env.JWT_USER_SECRET,
+            {
+                expiresIn: "7d",
+            }
+        );
+
+        res.json({
+            jwtToken,
+        });
+    
+    } catch (e) {
+        
+        const { message, statusCode } = dbErrorHelper(e);
+
+        res.status(statusCode).json({
+            message: message,
         });
     }
-};
+}
 
-async function getUserInfo(req, res) {
+// async function getUserInfo(req, res) {
 
-    try {
+//     try {
 
-        const decodedData = res.locals.decodedData;
-        const foundUser = await User.findOne({ email: decodedData.email })
-        // .populate(
-        // "orderHistory", "-orderOwner -__v");
+//         const decodedData = res.locals.decodedData;
+//         const foundUser = await User.findOne({ email: decodedData.email })
+//         // .populate(
+//         // "orderHistory", "-orderOwner -__v");
 
-        res.json({ message: "success", payload: foundUser })
+//         res.json({ message: "success", payload: foundUser })
 
-    } catch (e) {
+//     } catch (e) {
 
-        res.status(500).json({ message: "error", error: errorHandler(error) });
+//         res.status(500).json({ message: "error", error: errorHandler(error) });
 
-    }
-};
+//     }
+// };
 
 module.exports = {
     createUser,
