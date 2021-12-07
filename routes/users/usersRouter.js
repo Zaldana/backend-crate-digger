@@ -6,7 +6,6 @@ const {
   createUser,
   login,
   updateUser,
-  getUserInfo
 } = require("./controller/userController");
 
 const {
@@ -15,15 +14,15 @@ const {
   validateCreateData,
   validateLoginData,
   validateUpdateData
-  // jwtMiddleware
 } = require("../lib/authMiddleWare");
 
 router.get(
   '/',
   passport.authenticate("jwt-user", { session: false }),
   function (req, res, next) {
-    res.send(getUserInfo);
-  });
+    console.log(req.user);
+    res.send('respond with a resource');
+  } );
 
 router.post(
   "/create-user",
@@ -35,6 +34,7 @@ router.post(
 
 router.put(
   "/edit-user",
+  passport.authenticate("jwt-user", { session: false }),
   checkIsUndefined,
   checkIsEmpty,
   validateUpdateData,

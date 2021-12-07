@@ -41,14 +41,13 @@ async function updateUser(req, res) {
 
     try {
 
-        const decodedData = res.locals.decodedData;
         let salt = await bcrypt.genSalt(10);
         let hashed = await bcrypt.hash(password, salt);
 
         req.body.password = hashed;
 
         let updatedUser = await User.findOneAndUpdate(
-            { email: decodedData.email },
+            { email: req.user.email },
             req.body,
             { new: true }
         );
@@ -115,29 +114,9 @@ async function login(req, res) {
     }
 }
 
-async function getUserInfo(req, res) {
-
-    try {
-
-        const decodedData = res.locals.decodedData;
-        const foundUser = await User.findOne({ email: decodedData.email })
-
-        res.json({ message: "success", payload: foundUser })
-
-    } catch (e) {
-        
-        const { message, statusCode } = dbErrorHelper(e);
-
-        res.status(statusCode).json({
-            message: message,
-        });
-
-    }
-};
 
 module.exports = {
     createUser,
     login,
     updateUser,
-    getUserInfo
 };

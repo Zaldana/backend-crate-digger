@@ -39,7 +39,6 @@ function validateUpdateData(req, res, next) {
     }
 }
 
-
 module.exports = {
     validateUpdateData,
 };
