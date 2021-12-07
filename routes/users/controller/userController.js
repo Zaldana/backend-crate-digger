@@ -115,26 +115,29 @@ async function login(req, res) {
     }
 }
 
-// async function getUserInfo(req, res) {
+async function getUserInfo(req, res) {
 
-//     try {
+    try {
 
-//         const decodedData = res.locals.decodedData;
-//         const foundUser = await User.findOne({ email: decodedData.email })
-//         // .populate(
-//         // "orderHistory", "-orderOwner -__v");
+        const decodedData = res.locals.decodedData;
+        const foundUser = await User.findOne({ email: decodedData.email })
 
-//         res.json({ message: "success", payload: foundUser })
+        res.json({ message: "success", payload: foundUser })
 
-//     } catch (e) {
+    } catch (e) {
+        
+        const { message, statusCode } = dbErrorHelper(e);
 
-//         res.status(500).json({ message: "error", error: errorHandler(error) });
+        res.status(statusCode).json({
+            message: message,
+        });
 
-//     }
-// };
+    }
+};
 
 module.exports = {
     createUser,
     login,
-    updateUser
+    updateUser,
+    getUserInfo
 };

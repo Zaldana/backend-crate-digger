@@ -5,7 +5,8 @@ var passport = require('passport')
 const {
   createUser,
   login,
-  updateUser
+  updateUser,
+  getUserInfo
 } = require("./controller/userController");
 
 const {
@@ -21,7 +22,7 @@ router.get(
   '/',
   passport.authenticate("jwt-user", { session: false }),
   function (req, res, next) {
-    res.send('respond with a resource');
+    res.send(getUserInfo);
   });
 
 router.post(
