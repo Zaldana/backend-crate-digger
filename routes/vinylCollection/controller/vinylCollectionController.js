@@ -97,6 +97,29 @@ async function deleteAlbum(req, res) {
 
 };
 
+async function findAlbum(req, res) {
+
+    try {
+
+        let foundAlbum = await Album.findById(req.params.id);
+
+        if (!foundAlbum) {
+
+            res.status(404).json({ message: "failure", error: "Order not found" });
+
+        } else {
+
+            res.json({ message: "success", payload: foundAlbum })
+        }
+        
+    } catch (e) {
+
+        res.status(500).json(errorHandler(e));
+    }
+}
+
+        
+
 async function updateAlbum(req, res) {
 
         try {
@@ -133,4 +156,5 @@ module.exports = {
     deleteAlbum,
     updateAlbum,
     getAllCollection,
+    findAlbum
 }
