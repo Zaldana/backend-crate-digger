@@ -2,27 +2,28 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport')
 
-// const {
-//     jwtMiddleware
-// } = require("../lib/authMiddleware");
-
 const {
-    getAllAlbums,
+    getAllCollection,
     addToCollection,
-    deleteAlbum
+    deleteAlbum,
 } = require("./controller/vinylCollectionController");
 
-// router.get(
-//     '/',
-//     passport.authenticate("jwt-user", { session: false }),
-//     function (req, res, next) {
-//         res.send('respond with a resource');
-//     });
+router.get(
+    "/",
+    passport.authenticate("jwt-user", { session: false }),
+    getAllCollectionf
+);
 
-router.get('/', jwtMiddleware, getAllAlbums);
+router.post(
+    "/add",
+    passport.authenticate("jwt-user", { session: false }),
+    addToCollection
+);
 
-router.post("/add-album", jwtMiddleware, addToCollection);
-
-router.delete("/delete-album-by-id/:id", jwtMiddleware, deleteAlbum);
+router.delete(
+    "/delete-album-by-id/:id",
+    passport.authenticate("jwt-user", { session: false }),
+    deleteAlbum
+);
 
 module.exports = router;

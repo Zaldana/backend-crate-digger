@@ -12,8 +12,9 @@ var app = express();
 var mongoose = require("mongoose")
 
 //Routers
-var indexRouter = require("./routes/index");
+var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/usersRouter');
+var vinylCollectionRouter = require('./routes/vinylCollection/vinylCollectionRouter')
 
 var userJWTLoginStrategy = require('./routes/lib/passport/user-passport');
 const passport = require('passport');
@@ -41,6 +42,7 @@ passport.use("jwt-user", userJWTLoginStrategy)
 //Invoke routing middleware
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/collection', vinylCollectionRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

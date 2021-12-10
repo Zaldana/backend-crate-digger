@@ -2,10 +2,10 @@ const Album = require('../model/Album');
 const User = require('../../users/model/User');
 const dbErrorHelper = require("../../lib/dbErrorHelper/dbErrorHelper")
 
-async function getAllAlbums(req, res) {
+async function getAllCollection(req, res) {
 
-    let currentAlbumCollection = await Album.find({});
-    res.json({ message: "success", currentAlbumCollection })
+    let allCollection = await Album.find({});
+    res.json({ message: "success", allCollection })
 
 };
 
@@ -13,8 +13,7 @@ async function addToCollection(req, res) {
 
     try {
 
-        const decodedData = res.locals.decodedData
-        let foundUser = await User.findOne({ email: decodedData.email })
+        let foundUser = req.user;
         
         const {
             albumName,
@@ -99,7 +98,7 @@ async function deleteAlbum(req, res) {
 };
 
 module.exports = {
-    getAllAlbums,
     addToCollection,
-    deleteAlbum
+    deleteAlbum,
+    getAllCollection,
 }

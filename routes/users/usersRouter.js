@@ -22,7 +22,7 @@ router.get(
   function (req, res, next) {
     console.log(req.user);
     res.send('respond with a resource');
-  } );
+  });
 
 router.post(
   "/create-user",

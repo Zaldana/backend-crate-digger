@@ -21,7 +21,7 @@ const AlbumSchema = new mongoose.Schema(
         },
 
         albumYear: {
-            type: String
+            type: Number
         },
 
         albumLabel: {
@@ -29,7 +29,7 @@ const AlbumSchema = new mongoose.Schema(
         },
 
         albumTracklist: {
-            type: String
+            type: Array
         },
 
         albumCondition: {
