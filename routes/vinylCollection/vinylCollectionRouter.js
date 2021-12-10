@@ -6,18 +6,25 @@ const {
     getAllCollection,
     addToCollection,
     deleteAlbum,
+    updateAlbum,
 } = require("./controller/vinylCollectionController");
 
 router.get(
     "/",
     passport.authenticate("jwt-user", { session: false }),
-    getAllCollectionf
+    getAllCollection
 );
 
 router.post(
     "/add",
     passport.authenticate("jwt-user", { session: false }),
     addToCollection
+);
+
+router.put(
+    "/update-album-by-id/:id",
+    passport.authenticate("jwt-user", { session: false }),
+    updateAlbum
 );
 
 router.delete(

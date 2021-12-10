@@ -97,8 +97,40 @@ async function deleteAlbum(req, res) {
 
 };
 
+async function updateAlbum(req, res) {
+
+        try {
+
+            let foundAlbum = await Album.findById(req.params.id);
+
+            if (!foundAlbum) {
+
+                res.status(404).json({ message: "failure", error: "Order not found" });
+
+            } else {
+
+                let updatedAlbum = await Album.findByIdAndUpdate(
+                    req.params.id,
+                    req.body,
+                    {
+                        new: true
+                    }
+                );
+
+                res.json({ message: "success", payload: updatedAlbum })
+
+            }
+
+        } catch (e) {
+
+            res.status(500).json(errorHandler(e));
+        }
+
+};
+
 module.exports = {
     addToCollection,
     deleteAlbum,
+    updateAlbum,
     getAllCollection,
 }

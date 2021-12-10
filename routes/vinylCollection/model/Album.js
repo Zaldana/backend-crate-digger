@@ -4,11 +4,14 @@ const AlbumSchema = new mongoose.Schema(
 
     {
         albumName: {
-
             type: String
         },
 
         albumCover: {
+            type: String
+        },
+
+        albumThumb: {
             type: String
         },
 
@@ -22,6 +25,10 @@ const AlbumSchema = new mongoose.Schema(
 
         albumYear: {
             type: Number
+        },
+
+        albumCountry: {
+            type: String
         },
 
         albumLabel: {
