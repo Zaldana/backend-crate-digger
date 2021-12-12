@@ -7,10 +7,6 @@ const AlbumSchema = new mongoose.Schema(
             type: String
         },
 
-        albumCover: {
-            type: String
-        },
-
         albumThumb: {
             type: String
         },
@@ -32,7 +28,7 @@ const AlbumSchema = new mongoose.Schema(
         },
 
         albumLabel: {
-            type: String
+            type: Array
         },
 
         albumTracklist: {
@@ -41,6 +37,14 @@ const AlbumSchema = new mongoose.Schema(
 
         albumCondition: {
             type: String
+        },
+
+        albumDescription: {
+            type: String
+        },
+
+        albumGenre: {
+            type: Array
         },
 
         userID: {

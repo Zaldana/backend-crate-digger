@@ -4,8 +4,10 @@ const dbErrorHelper = require("../../lib/dbErrorHelper/dbErrorHelper")
 
 async function getAllCollection(req, res) {
 
-    let allCollection = await Album.find({});
-    res.json({ message: "success", allCollection })
+    let userCollectionArray = await req.user.vinylCollection;
+    const userCollection = await Album.find({ '_id': { $in: userCollectionArray } });
+
+    res.json({ message: "success", userCollection })
 
 };
 
@@ -21,9 +23,12 @@ async function addToCollection(req, res) {
             albumId,
             albumArtist,
             albumYear,
+            albumCountry,
             albumLabel,
             albumTracklist,
-            albumCondition
+            albumCondition,
+            albumDescription,
+            albumGenre,
         } = req.body;
 
         const newAlbum = new Album({
@@ -32,9 +37,13 @@ async function addToCollection(req, res) {
             albumId,
             albumArtist,
             albumYear,
+            albumCountry,
             albumLabel,
             albumTracklist,
             albumCondition,
+            albumDescription,
+            albumGenre,
+
             userID: foundUser._id
         })
 
@@ -68,9 +77,8 @@ async function deleteAlbum(req, res) {
 
         } else {
 
-            const decodedData = res.locals.decodedData;
 
-            let foundUser = await User.findOne({ email: decodedData.email });
+            let foundUser = req.user
 
             let userVinylCollection = foundUser.vinylCollection;
 
@@ -128,7 +136,7 @@ async function updateAlbum(req, res) {
 
             if (!foundAlbum) {
 
-                res.status(404).json({ message: "failure", error: "Order not found" });
+                res.status(404).json({ message: "failure", error: "Album not found" });
 
             } else {
 
