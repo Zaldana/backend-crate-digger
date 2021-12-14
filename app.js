@@ -14,7 +14,8 @@ var mongoose = require("mongoose")
 //Routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/usersRouter');
-var vinylCollectionRouter = require('./routes/vinylCollection/vinylCollectionRouter')
+var vinylCollectionRouter = require('./routes/vinylCollection/vinylCollectionRouter');
+var wishlistRouter = require('./routes/wishlist/wishlistRouter');
 
 var userJWTLoginStrategy = require('./routes/lib/passport/user-passport');
 const passport = require('passport');
@@ -43,6 +44,7 @@ passport.use("jwt-user", userJWTLoginStrategy)
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/collection', vinylCollectionRouter);
+app.use('/api/wishlist', wishlistRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

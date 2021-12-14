@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const AlbumSchema = new mongoose.Schema(
+const WishAlbumSchema = new mongoose.Schema(
 
     {
         albumName: {
@@ -58,4 +58,4 @@ const AlbumSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model("album", AlbumSchema);
+module.exports = mongoose.model("wishalbum", WishAlbumSchema);
