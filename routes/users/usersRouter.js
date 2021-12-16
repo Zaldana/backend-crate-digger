@@ -20,7 +20,6 @@ router.get(
   '/',
   passport.authenticate("jwt-user", { session: false }),
   function (req, res, next) {
-    console.log(req.user);
     res.send('respond with a resource');
   });
 

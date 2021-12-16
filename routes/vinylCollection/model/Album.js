@@ -47,6 +47,10 @@ const AlbumSchema = new mongoose.Schema(
             type: Array
         },
 
+        albumNotes: {
+            type: String
+        },
+
         userID: {
             type: mongoose.Schema.ObjectId,
             ref: "user",

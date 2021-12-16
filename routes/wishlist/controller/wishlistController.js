@@ -28,6 +28,7 @@ async function addToWishlist(req, res) {
             albumCondition,
             albumDescription,
             albumGenre,
+            albumNotes,
         } = req.body;
 
         const newAlbum = new WishAlbum({
@@ -42,6 +43,7 @@ async function addToWishlist(req, res) {
             albumCondition,
             albumDescription,
             albumGenre,
+            albumNotes,
 
             userID: foundUser._id
         })
