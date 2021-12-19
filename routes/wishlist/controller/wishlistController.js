@@ -5,9 +5,8 @@ async function getAllWishlist(req, res) {
 
     let userWishlistArray = await req.user.wishlist;
     const userWishlist = await WishAlbum.find({ '_id': { $in: userWishlistArray } });
-
+    
     res.json({ message: "success", userWishlist })
-
 };
 
 async function addToWishlist(req, res) {

@@ -2,10 +2,10 @@ const Album = require('../model/Album');
 const dbErrorHelper = require("../../lib/dbErrorHelper/dbErrorHelper")
 
 async function getAllCollection(req, res) {
-
+    
     let userCollectionArray = await req.user.vinylCollection;
     const userCollection = await Album.find({ '_id': { $in: userCollectionArray } });
-
+    
     res.json({ message: "success", userCollection })
 
 };
@@ -114,7 +114,7 @@ async function findAlbum(req, res) {
 
         if (!foundAlbum) {
 
-            res.status(404).json({ message: "failure", error: "Order not found" });
+            res.status(404).json({ message: "failure", error: "Album not found" });
 
         } else {
 

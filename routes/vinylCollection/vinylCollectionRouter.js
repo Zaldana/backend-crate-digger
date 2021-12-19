@@ -17,7 +17,7 @@ router.get(
 );
 
 router.get(
-    "/find-by-id",
+    "/find-by-id/:id",
     passport.authenticate("jwt-user", { session: false }),
     findAlbum
 );

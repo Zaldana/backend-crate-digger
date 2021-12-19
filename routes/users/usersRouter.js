@@ -6,6 +6,7 @@ const {
   createUser,
   login,
   updateUser,
+  getUser
 } = require("./controller/userController");
 
 const {
@@ -22,6 +23,12 @@ router.get(
   function (req, res, next) {
     res.send('respond with a resource');
   });
+
+router.get(
+  '/user-info',
+  passport.authenticate("jwt-user", { session: false }),
+  getUser
+);
 
 router.post(
   "/create-user",

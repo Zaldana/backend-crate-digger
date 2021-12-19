@@ -114,9 +114,18 @@ async function login(req, res) {
     }
 }
 
+async function getUser(req, res) {
+
+    let user = await req.user;
+
+    res.json({ message: "success", user })
+
+};
+
 
 module.exports = {
     createUser,
     login,
     updateUser,
+    getUser
 };
