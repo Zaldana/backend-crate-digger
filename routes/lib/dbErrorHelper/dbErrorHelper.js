@@ -1,6 +1,6 @@
 function getUniqueErrorMessage(err) {
+    
     let output;
-
     let message = err.message;
 
     try {
