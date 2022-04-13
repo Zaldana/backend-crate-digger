@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+const dbErrorHelper = require("../../lib/dbErrorHelper/dbErrorHelper")
 const User = require("../model/User");
-const dbErrorHelper =require("../../lib/dbErrorHelper/dbErrorHelper")
+
 
 async function createUser(req, res) {
 
