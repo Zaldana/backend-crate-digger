@@ -39,12 +39,12 @@ https://github.com/Zaldana/crate-digger-frontend-2
 Crate Digger is designed to focus the abilities of the Discogs API to vinyl specific releases, and allow a curation of the user’s personal library, and to help make quick purchasing decisions. A mobile and full browser work flow are both necessary to achieve the goals of the site. With that in mind the front-end is styled with React-Bootstrap, Chart.js library to visualize user data, and React-Toastify for alerts.
 
 <br />
-<img src="./images/unprotectedhome.png" height=150 width=250/>
-<img src="./images/signup.png" height=150 width=250/>
-<img src="./images/protectedhome.png" height=150 width=250/>
-<img src="./images/profile.png" height=150 width=250/>
-<img src="./images/search.png" height=150 width=250/>
-<img src="./images/detail.png" height=150 width=250/>
+<img src="./images/unprotectedhome.png" height=125 width=200/>
+<img src="./images/signup.png" height=125 width=200/>
+<img src="./images/protectedhome.png" height=125 width=200/>
+<img src="./images/profile.png" height=125 width=200/>
+<img src="./images/search.png" height=125 width=200/>
+<img src="./images/detail.png" height=125 width=200/>
 
 <br />
 
