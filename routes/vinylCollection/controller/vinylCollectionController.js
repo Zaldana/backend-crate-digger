@@ -157,7 +157,6 @@ async function updateAlbum(req, res) {
 
             res.status(500).json(errorHandler(e));
         }
-
 };
 
 module.exports = {

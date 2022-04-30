@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/usersRouter');
 var vinylCollectionRouter = require('./routes/vinylCollection/vinylCollectionRouter');
 var wishlistRouter = require('./routes/wishlist/wishlistRouter');
+var discogsRouter = require('./routes/discogs/discogsRouter')
 
 var userJWTLoginStrategy = require('./routes/lib/passport/user-passport');
 const passport = require('passport');
@@ -42,7 +43,7 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/collection', vinylCollectionRouter);
 app.use('/api/wishlist', wishlistRouter);
-
+app.use('/api/discogs', discogsRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
